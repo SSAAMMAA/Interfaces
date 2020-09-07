@@ -49,6 +49,44 @@ let downloadImg = () => {
     link.download = filename;
 }
 
+let addImgToCanvas = (ctx) => {
+    deleteAll(ctx);
+    let canvas = document.querySelector("#canvas");
+
+    let input = document.querySelector('.imgInput');
+
+    input.onchange = e => {
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = readerEvent => {
+            let content = readerEvent.target.result;
+            let image = new Image();
+            image.src = content;
+            image.onload = function () {
+                let imageAspectRatio = (1.0 * this.height) / this.width;
+                let imageScaledWidth = canvas.width;
+                let imageScaledHeight = canvas.width * imageAspectRatio;
+                let startWidth = 0;
+                let startHeigh = 0;
+                if (this.width < this.height) {
+                    imageAspectRatio = (1.0 * this.width) / this.height;
+                    imageScaledWidth = canvas.height * imageAspectRatio;
+                    imageScaledHeight = canvas.height;
+                    startWidth = (canvas.width / 2) - (imageScaledWidth / 2);
+                } else {
+                    startHeigh = (canvas.height / 2) - (imageScaledHeight / 2);
+                }
+                ctx.drawImage(this, startWidth, startHeigh, imageScaledWidth, imageScaledHeight);
+
+                let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
+                ctx.putImageData(imageData, 0, 0);
+            }
+        }
+    }
+}
+
 let loadPage = () => {
 
 
@@ -68,5 +106,10 @@ let loadPage = () => {
     let btnDownload = document.querySelector("#btnDownload");
     btnDownload.addEventListener("click", downloadImg);
 
+    let btnUpload = document.querySelector("#btnUpload");
+    btnUpload.addEventListener("click", function (e) {
+        document.querySelector('.imgInput').click();
+        addImgToCanvas(ctx);
+    })
 }
 document.addEventListener("DOMContentLoaded", loadPage);
