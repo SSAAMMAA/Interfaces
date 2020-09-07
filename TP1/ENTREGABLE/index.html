@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -13,29 +15,40 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8">
-                <canvas id="canvas" width="1248" height="624">
+            <div class="col-10">
+                <canvas id="canvas" width="1200" height="600">
 
                 </canvas>
             </div>
-            <div class="col-2">
+            <div class="col-1 container-tools">
+                <label>Herramientas</label>
                 <div class="row">
-                    <button type="button" id="btnPencil" class="btn btn-secondary">Lapiz</button>
-                </div>
-
-                <div class="row">
-                    <button type="button" id="btnEraser" class="btn btn-secondary">Goma</button>
+                    <button type="button" id="btnPencil" class="btn btn-secondary btn-block"><i
+                            class="fas fa-pencil-alt"></i></button>
+                    <button type="button" id="btnEraser" class="btn btn-secondary btn-block"><i
+                            class="fas fa-eraser"></i></button>
                 </div>
 
                 <div class="row">
                     <label for="range">Tamaño</label>
                     <input type="range" class="custom-range" min="5" max="25" step="5" id="range">
                 </div>
-                <label for="muestrario">Color:</label>
-                <input type="color" value="#ff0000" id="muestrario">
+                <div class="row">
+                    <label for="muestrario">Color</label>
+                    <input type="color" class="form-control" value="#ff0000" id="muestrario">
+                </div>
+                <div class="row">
+                    <button type="button" id="btnDelete" class="btn btn-secondary btn-block"><i
+                            class="fas fa-trash"></i></button>
+                    <a id="download" download><button type="button" id="btnDownload"
+                            class="btn btn-secondary btn-block"><i class="far fa-save"></i></button></a>
+                </div>
             </div>
         </div>
     </div>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+        integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
