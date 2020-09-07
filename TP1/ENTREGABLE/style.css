@@ -1,0 +1,28 @@
+#canvas {
+    border: solid 1px #d3d3d3;
+    /*width: 100%;*/
+}
+
+.color-primary-0 {
+    color: #622870;
+}
+
+.color-primary-1 {
+    color: #9E72A8;
+}
+
+.color-primary-2 {
+    color: #7F488C;
+}
+
+.color-primary-3 {
+    color: #471054;
+}
+
+.color-primary-4 {
+    color: #2D0238;
+}
+
+.rgba-primary-0 {
+    color: rgba( 98, 40, 112, 1)
+}
