@@ -43,13 +43,13 @@ let deleteAll = (ctx) => {
 
 let downloadImg = () => {
     let link = document.querySelector("#download");
-    let filename = prompt("Guardar como...", "Nombre del archivo");
+    let filename = prompt("Seleccione el nombre de la imagen", "Nombre de la imagen");
     filename = filename + ".jpg";
     link.href = document.querySelector("#canvas").toDataURL("image/jpg");
     link.download = filename;
 }
 
-let addImgToCanvas = (ctx) => {
+let addImgToCanvas = (ctx,imageData) => {
     deleteAll(ctx);
     let canvas = document.querySelector("#canvas");
 
@@ -79,24 +79,23 @@ let addImgToCanvas = (ctx) => {
                     startHeigh = (canvas.height / 2) - (imageScaledHeight / 2);
                 }
                 ctx.drawImage(this, startWidth, startHeigh, imageScaledWidth, imageScaledHeight);
-
-                let imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
+                imageOrigin = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
+                imageData = ctx.getImageData(0, 0, imageScaledWidth, imageScaledHeight);
                 ctx.putImageData(imageData, 0, 0);
             }
         }
     }
 }
 
+let loadOriginalImg = (ctx) =>{
+    deleteAll(ctx);
+    ctx.putImageData(imageOrigin, 0, 0);
+}
+
 let loadPage = () => {
-
-
     let ctx = document.querySelector("#canvas").getContext("2d");
-
-    let width = document.querySelector("#canvas").width;
-    let height = document.querySelector("#canvas").height;
-
-    let imageData = ctx.createImageData(width, height);
-
+    let imageData;
+    let imageOrigin;
     let btnPencil = document.querySelector("#btnPencil");
     btnPencil.addEventListener("click", function (e) { paintTool(true, ctx) });
     let btnEraser = document.querySelector("#btnEraser");
@@ -109,7 +108,7 @@ let loadPage = () => {
     let btnUpload = document.querySelector("#btnUpload");
     btnUpload.addEventListener("click", function (e) {
         document.querySelector('.imgInput').click();
-        addImgToCanvas(ctx);
-    })
+        addImgToCanvas(ctx,imageData);
+    });
 }
 document.addEventListener("DOMContentLoaded", loadPage);
