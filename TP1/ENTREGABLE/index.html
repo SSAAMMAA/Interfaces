@@ -28,8 +28,7 @@
                     <button type="button" id="btnEraser" class="btn btn-secondary btn-block"><i
                             class="fas fa-eraser"></i></button>
                 </div>
-
-                <div class="row">
+                <div class="row range-paint">
                     <label for="range">Tamaño</label>
                     <input type="range" class="custom-range" min="5" max="25" step="5" id="range">
                 </div>
@@ -49,7 +48,34 @@
                     <input class="imgInput" type="file" style="display: none;"
                         accept="image/x-png,image/gif,image/jpeg">
                 </div>
-
+                <div class="row">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-block" type="button" id="filterDropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filtros
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="filterDropdown">
+                            <button class="dropdown-item btn-secondary" id="btnFilterNegative"
+                                type="button">Negativo</button>
+                            <button class="dropdown-item btn-secondary" id="btnFilterBrightness"
+                                type="button">Brillo</button>
+                            <button class="dropdown-item btn-secondary" id="btnFilterBlackAndWhite" type="button">Blanco
+                                y Negro</button>
+                            <button class="dropdown-item btn-secondary" id="btnFilterBinary"
+                                type="button">Binarización</button>
+                            <button class="dropdown-item btn-secondary" id="btnFilterSepia" type="button">Sepia</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row range-paint intensity hidden">
+                    <label for="intensity">Intensidad</label>
+                    <input type="range" class="custom-range hidden" min="0" max="255" step="5" id="intensityBrightness">
+                    <input type="range" class="custom-range hidden" min="0" max="255" step="5"
+                        id="intensityBlackAndWhite">
+                    <input type="range" class="custom-range hidden" min="0" max="255" step="5" value="127"
+                        id="intensityBinary">
+                    <input type="range" class="custom-range hidden" min="0" max="255" step="5" id="intensitySepia">
+                </div>
             </div>
         </div>
     </div>
