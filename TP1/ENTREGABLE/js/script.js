@@ -403,6 +403,8 @@ let loadPage = () => {
     let btnFilterBlur = document.querySelector("#btnFilterBlur");
     btnFilterBlur.addEventListener("click", function (e) {
         applyBlurFilter(ctx);
+        ocultAllRanges();
+        document.querySelector(".intensity").classList.add('hidden');
     });
 
     let btnFilterSaturation = document.querySelector("#btnFilterSaturation");
