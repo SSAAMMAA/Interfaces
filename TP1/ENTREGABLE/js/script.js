@@ -26,6 +26,7 @@ let paintTool = (tool, ctx) => {
                 ctx.beginPath();
                 ctx.clearRect(e.pageX - c.offsetLeft, e.pageY - c.offsetTop, document.querySelector("#range").value, document.querySelector("#range").value);
             }
+            imageOrigin = ctx.getImageData(0, 0, canvas.width, canvas.height);
         }
     }
     c.onmouseout = function () {
