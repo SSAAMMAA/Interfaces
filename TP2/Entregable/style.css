@@ -1,0 +1,59 @@
+body {
+    background-color: #ddd4ee;
+}
+
+.hidden {
+    display: none;
+}
+
+.column-canvas-container{
+    margin: 0;
+    padding: 0;
+}
+
+.canvas-container{
+    display: flex;        
+    justify-content: center;
+}
+
+#canvas {
+    /*width: 100%;
+    height: 38em;*/
+    border: solid 1px #ddd4ee;
+    background-color: #ffffff;
+}
+
+.container-tools {
+    margin-top: 2%;
+}
+
+.range-paint {
+    margin-top: 4%!important;
+}
+
+
+.container-tools>.row {
+    margin-top: 1%;
+}
+
+#download, .dropdown {
+    width: 100%;
+}
+
+
+.btn {
+    margin-top: 6%;
+    background-color: #2D0238;
+}
+
+.btn:hover, .dropdown-menu {
+    background-color: #622870;
+}
+
+.dropdown-item {
+    color: #FFFFFF;
+}
+
+.form-control {
+    margin-bottom: 10%;
+}
