@@ -1,22 +1,17 @@
-class Circulo extends Figura {
-    constructor(posX, posY, radius, fill, context, src) {
+class Ficha extends Figura {
+    constructor(posX, posY, radius, fill, context, img) {
         super(posX, posY, fill, context);
-        this.src = src;
+        this.img = img;
         this.radius = radius;
     }
 
     draw() {
         super.draw();
-        let img = new Image();
-        img.src = 'images/ficha-roja.png';
-        let cargarImg = function () {
-            let imgSize =70;
-            this.context.drawImage(img, this.posX - (imgSize / 2), this.posY - (imgSize / 2), imgSize, imgSize);
-            this.radius= imgSize / 2;
-        }
-        img.onload = cargarImg.bind(this);
-
+        let imgSize = 70;
+        this.context.drawImage(this.img, this.posX - (imgSize / 2), this.posY - (imgSize / 2), imgSize, imgSize);
+        this.radius = imgSize / 2;
     }
+
     isPointInside(x, y) {
         let _x = this.posX - x;
         let _y = this.posY - y;

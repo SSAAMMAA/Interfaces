@@ -18,8 +18,14 @@ let drawFigures = () => {
 }
 
 let addCircle = (posX,posY) => {
-    circle = new Circulo(posX, posY, 50, "#FFF", context,'images/ficha-roja.png');
+    circle = new Ficha(posX, posY, 50, "#FFF", context,getImg('images/ficha-roja.png'));
     figures.push(circle);
+}
+
+let getImg = (src)=>{
+    let img = new Image();
+    img.src = src;
+    return img;
 }
 
 function findClickedFigure(x, y) {
