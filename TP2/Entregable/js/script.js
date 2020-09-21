@@ -13,7 +13,12 @@ function addFigure(posX, posY) {
 let drawFigures = () => {
     clearCanvas();
     for (let i = 0; i < figures.length; i++) {
-        figures[i].draw();
+        if(figures[i] != lastClickedFigure) {
+            figures[i].draw();
+        }
+    }
+    if(lastClickedFigure != null) {
+        lastClickedFigure.draw();
     }
 }
 
