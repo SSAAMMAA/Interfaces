@@ -1,20 +1,14 @@
-class Rectangulo extends Figura {
-    constructor(posX, posY, width, height, fill, context) {
-        super(posX, posY, fill, context);
-
-        this.width = width;
-        this.height = height;
+class Rectangulo {
+    constructor(context, size) {
+        this.size = size;
+        this.context = context;
     }
-
-    draw() {
-        super.draw();
-        this.context.fillRect(this.posX, this.posY, this.width, this.height);
-    }
-
-    getWidth() {
-        return this.width;
-    }
-    getHeight() {
-        return this.height;
+    
+    addImage(posX,posY){
+        let img = new Image();
+        img.src = "images/casillero.png";
+        img.onload = function(){
+            context.drawImage(img, posX,posY,100,100);
+        }
     }
 }

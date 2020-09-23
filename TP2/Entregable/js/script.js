@@ -5,8 +5,8 @@ let canvasHeight = canvas.height;
 
 let figures = [];
 
-function addFigure(posX, posY) {
-    addCircle(posX, posY);
+function addFigure(posX, posY,src) {
+    addFicha(posX, posY,src);
     drawFigures();
 }
 
@@ -22,8 +22,8 @@ let drawFigures = () => {
     }
 }
 
-let addCircle = (posX,posY) => {
-    circle = new Ficha(posX, posY, 50, "#FFF", context,getImg('images/ficha-roja.png'));
+let addFicha = (posX,posY,src) => {
+    circle = new Ficha(posX, posY, 50, "#FFF", context,getImg(src));
     figures.push(circle);
 }
 
@@ -68,7 +68,7 @@ function onMouseMoved(event) {
     }
 }
 
-function onMouseUp(event) {
+function onMouseUp() {
     isMouseDown = false;
 }
 
@@ -76,16 +76,25 @@ function clearCanvas() {
     context.fillStyle = '#FFFFFF';
     context.fillRect(0, 0, canvasWidth, canvasHeight);
 }
+let addFichas = (cant, src, width)=>{
+    for (let index = 0; index <= cant; index++) {
+        addFigure(width+( Math.random() * 150), (canvasHeight/2)+( Math.random() * 150), src);
+    }
+}
 
-let loadPage = () => {
-
+let iniciarJuego = () =>{
+    let tablero = new Tablero(context,6,7);
+    tablero.iniciarTablero();
+    let cantidad = tablero.getCantidad() / 2;
     canvas.addEventListener('mousedown', onMouseDown, false);
     canvas.addEventListener('mouseup', onMouseUp, false);
     canvas.addEventListener('mousemove', onMouseMoved, false);
-   // document.querySelector('#canvas').addEventListener("click", function(e){
-        addFigure(200, 200);
-        addFigure(500, 300);
-
-    //    }    );
+    addFichas(cantidad,'images/ficha-roja.png', 30);
+    addFichas(cantidad,'images/ficha-azul.png', canvasWidth-180);
+    
+}
+let loadPage = () => {
+    document.querySelector("#initGame").addEventListener("click", iniciarJuego);
+    //iniciarJuego();
 }
 document.addEventListener("DOMContentLoaded", loadPage);
