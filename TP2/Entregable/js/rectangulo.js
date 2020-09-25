@@ -1,14 +1,12 @@
 class Rectangulo {
-    constructor(context, size) {
-        this.size = size;
-        this.context = context;
+    constructor() {
+
     }
     
-    addImage(posX,posY){
+    addImage(src, posX, posY, size){
         let img = new Image();
-        img.src = "images/casillero.png";
-        img.onload = function(){
-            context.drawImage(img, posX,posY,100,100);
-        }
+        img.src = src;
+        context.drawImage(img, posX, posY, size, size);
     }
+
 }

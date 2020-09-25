@@ -1,12 +1,17 @@
 class Ficha {
-    constructor(posX, posY, imgSize, fill, context, img) {
+    constructor(posX, posY, size, context, img, jugador) {
         this.posX = posX;
         this.posY = posY;
-        this.fill = fill;
-        this.imgSize = imgSize;
+        this.fill = "#FFF";
+        this.size = size;
         this.context = context;
         this.img = img;
-        this.radius = imgSize/2;
+        this.radius = size/2;
+        this.jugador = jugador;
+    }
+
+    getJugador(){
+        return this.jugador;
     }
 
     setFill(fill) {
@@ -39,7 +44,7 @@ class Ficha {
     
     draw() {
         this.context.fillStyle = this.fill;
-        this.context.drawImage(this.img, this.posX - this.radius, this.posY - this.radius, this.imgSize, this.imgSize);
+        this.context.drawImage(this.img, this.posX - this.radius, this.posY - this.radius, this.size, this.size);
     }
 
     isPointInside(x, y) {
