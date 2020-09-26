@@ -2,10 +2,12 @@ let canvas = document.querySelector('#canvas');
 let context = canvas.getContext('2d');
 let canvasWidth = canvas.width;
 let canvasHeight = canvas.height;
-let tablero = new Tablero(context,6,7);
+let generalSize = 100;
+let tablero = new Tablero(context,6,10, generalSize);
 let cantidad = tablero.getCantidad() / 2;
-
-
+let turno = 1;
+let lastClickedFigure = null;
+let isMouseDown = false;
 let figures = [];
 
 function addFigure(posX, posY,src,player) {
@@ -15,6 +17,7 @@ function addFigure(posX, posY,src,player) {
 
 let drawFigures = () => {
     clearCanvas();
+    tablero.iniciarFondo();
     for (let i = 0; i < figures.length; i++) {
         if(figures[i] != lastClickedFigure) {
             figures[i].draw();
@@ -27,7 +30,7 @@ let drawFigures = () => {
 }
 
 let addFicha = (posX,posY,src,player) => {
-    circle = new Ficha(posX, posY, 85, context,getImg(src), player);
+    circle = new Ficha(posX, posY, generalSize-(generalSize*0.15), context,getImg(src), player);
     figures.push(circle);
 }
 
@@ -46,20 +49,13 @@ function findClickedFigure(x, y) {
     }
 }
 
-let lastClickedFigure = null;
-let isMouseDown = false;
-
 function onMouseDown(event) {
     isMouseDown = true;
-
-    // Se limpia la propiedad highlighted de la ultima figura clickeada
     if (lastClickedFigure != null) {
         lastClickedFigure = null;
     }
-
-    // Buscar si hay una nueva figura clickeada
     let clickedFigure = findClickedFigure(event.layerX, event.layerY);
-    if (clickedFigure != null) {
+    if (clickedFigure != null && turno == clickedFigure.getJugador()) {
         lastClickedFigure = clickedFigure;
     }
     drawFigures();
@@ -75,35 +71,37 @@ function onMouseMoved(event) {
 function onMouseUp(event) {
     isMouseDown = false;
     if(lastClickedFigure != null){
-        let x = 320;
+        let x = 300;
         let y = 540;
-        if (event.layerX>280 && event.layerX<950 && event.layerY>=0 && event.layerY<100 ){
-            for(let i=0; i<=7; i++){
-                let inicio = 280+(100*i);
-                for(let j=0; j<=6; j++){    
+        if (event.layerX>250 && event.layerX<(250*tablero.getFila()) && event.layerY>=0 && event.layerY<generalSize ){
+            for(let i=0; i<=tablero.getFila(); i++){
+                let inicio = 250+(generalSize*i);
+                for(let j=0; j<=tablero.getColumna(); j++){    
                     if(event.layerX >= inicio && event.layerX <= inicio+99){
-                        console.log(`La ficha es : ${tablero.getFicha(i,j) == 0}`);
-
                         if(tablero.getFicha(i,j) == 0){
                             tablero.setFicha(i,j, lastClickedFigure.getJugador());
-                            lastClickedFigure.setPosition(x+(100*i), y-(100*j));
+                            lastClickedFigure.setPosition(x+(generalSize*i), y-(generalSize*j));
+                            lastClickedFigure.setJugo(true);
                             drawFigures();
+                            cambiaTurno();
                             break;
                         }
                     }
                 }
             }
-            console.log("estoy donde quiero tirar")
-            console.log(`${event.layerX} ${event.layerX} ${event.layerY} ${event.layerY} `);
         }else{
-            console.log("estoy fuera") 
-            console.log(`${event.layerX} ${event.layerX} ${event.layerY} ${event.layerY} `);
-    
+            //Si la ficha no esta dentro del lugar de tiro, la vuelve al origien
+            if(lastClickedFigure.getJugador() == 1){
+                lastClickedFigure.setPosition(30+( Math.random() * 150),(canvasHeight/2)+( Math.random() * 150));
+            }else{
+                lastClickedFigure.setPosition(canvasWidth-180+( Math.random() * 150),(canvasHeight/2)+( Math.random() * 150));
+            }
+            drawFigures();
         }
     }  
 }
 
-function clearCanvas() {
+let clearCanvas = () =>{
     context.fillStyle = '#FFFFFF';
     context.fillRect(0, 0, canvasWidth, canvasHeight);
 }
@@ -114,10 +112,22 @@ let addFichas = (cant, src, width, player)=>{
     }
 }
 
+let cambiaTurno=()=>{
+    if(turno != 0){
+        if(turno == 2){
+            turno = 1;
+        }
+        else{
+            turno = 2;
+        }
+    }
+}
+
 let juegoIniciado = false;
 let iniciarJuego = () =>{
     if(juegoIniciado == false){
         juegoIniciado = true;
+        tablero.iniciarFondo();
         tablero.iniciarTablero();
         tablero.iniciarMatriz();
         canvas.addEventListener('mousedown', onMouseDown, false);

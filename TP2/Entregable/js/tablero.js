@@ -1,21 +1,30 @@
 class Tablero{
-    constructor(context, filas, columnas) {
+    constructor(context, filas, columnas, size) {
         this.context = context;
         this.filas = filas;
         this.columnas = columnas;
-        this.tablero = [];
+        this.size = size;
         this.matriz = [];
     }
 
     iniciarTablero(){
         for (let x = 0; x < this.columnas; x++) {
-            this.tablero[x] = [];
             for(let y = 0; y< this.filas; y++ ){
-                let posX = (x * 100)+270;
-                let posY = (y * 100)+90;
+                let posX = (x * this.size)+250;
+                let posY = (y * this.size)+90;
                 let cuadrado = new Rectangulo();
-                cuadrado.addImage("images/casillero.png",posX,posY,100);
-                this.tablero[x][y] = cuadrado;
+                cuadrado.addImage("images/casillero.png",posX,posY,this.size);
+            }
+        }
+    }
+
+    iniciarFondo(){
+        for (let x = 0; x < this.columnas; x++) {
+            for(let y = 0; y< this.filas; y++ ){
+                let posX = (x * this.size)+250;
+                let posY = (y * this.size)+90;
+                let cuadrado = new Rectangulo();
+                cuadrado.addImage("images/casillero-fondo.png",posX,posY,this.size);
             }
         }
     }
@@ -28,6 +37,7 @@ class Tablero{
             }
         }
     }
+
     setFicha(x,y,player){
         this.matriz[x][y] = player;
     }

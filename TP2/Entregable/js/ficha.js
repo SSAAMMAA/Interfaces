@@ -8,6 +8,7 @@ class Ficha {
         this.img = img;
         this.radius = size/2;
         this.jugador = jugador;
+        this.jugo = false;
     }
 
     getJugador(){
@@ -19,8 +20,14 @@ class Ficha {
     }
 
     setPosition(x, y) {
-        this.posX = x;
-        this.posY = y;
+        if(this.jugo == false){
+            this.posX = x;
+            this.posY = y;
+        }
+    }
+
+    setJugo(bool){
+        this.jugo = bool;
     }
 
     getPosition() {
