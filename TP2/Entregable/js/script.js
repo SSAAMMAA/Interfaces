@@ -3,7 +3,7 @@ let context = canvas.getContext('2d');
 let canvasWidth = canvas.width;
 let canvasHeight = canvas.height;
 let generalSize = 100;
-let tablero = new Tablero(context,6,10, generalSize);
+let tablero = new Tablero(context,5,10, generalSize);
 let cantidad = tablero.getCantidad() / 2;
 let turno = 1;
 let lastClickedFigure = null;
@@ -72,7 +72,7 @@ function onMouseUp(event) {
     isMouseDown = false;
     if(lastClickedFigure != null){
         let x = 300;
-        let y = 540;
+        let y = 550;
         if (event.layerX>250 && event.layerX<(250*tablero.getFila()) && event.layerY>=0 && event.layerY<generalSize ){
             for(let i=0; i<=tablero.getFila(); i++){
                 let inicio = 250+(generalSize*i);
@@ -84,6 +84,8 @@ function onMouseUp(event) {
                             lastClickedFigure.setJugo(true);
                             drawFigures();
                             cambiaTurno();
+                            //tablero.isGanador(i,j,lastClickedFigure.getJugador());
+                            console.log ('Gano el: ' + tablero.isGanador(i,j,lastClickedFigure.getJugador()));
                             break;
                         }
                     }
