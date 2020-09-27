@@ -6,12 +6,12 @@ class Ficha {
         this.size = size;
         this.context = context;
         this.img = img;
-        this.radius = size/2;
+        this.radius = size / 2;
         this.jugador = jugador;
         this.jugo = false;
     }
 
-    getJugador(){
+    getJugador() {
         return this.jugador;
     }
 
@@ -20,13 +20,13 @@ class Ficha {
     }
 
     setPosition(x, y) {
-        if(this.jugo == false){
+        if (this.jugo == false) {
             this.posX = x;
             this.posY = y;
         }
     }
 
-    setJugo(bool){
+    setJugo(bool) {
         this.jugo = bool;
     }
 
@@ -48,7 +48,7 @@ class Ficha {
     getFill() {
         return this.fill;
     }
-    
+
     draw() {
         this.context.fillStyle = this.fill;
         this.context.drawImage(this.img, this.posX - this.radius, this.posY - this.radius, this.size, this.size);
@@ -64,4 +64,11 @@ class Ficha {
         return this.radius;
     }
 
+    volverAOrigen() {
+        if (this.getJugador() == 1) {
+            this.setPosition(30 + (Math.random() * 150), (canvasHeight / 2) + (Math.random() * 150));
+        } else {
+            this.setPosition(canvasWidth - 180 + (Math.random() * 150), (canvasHeight / 2) + (Math.random() * 150));
+        }
+    }
 }
