@@ -3,14 +3,37 @@ let context = canvas.getContext('2d');
 let canvasWidth = canvas.width;
 let canvasHeight = canvas.height;
 let generalSize = 100;
+let tokenToWin = document.querySelector('#tokenToWin').value;
 let tablero = new Tablero(context, 5, 10, generalSize);
 let cantidad = tablero.getCantidad() / 2;
 let turno = 1;
 let lastClickedFigure = null;
 let isMouseDown = false;
 let figures = [];
+let lastFigurePlayedX = null;
+let lastFigurePlayedY = null;
+let gano = -1;
+let juegoIniciado = false;
+let player1 = null;
+let player2 = null;
+let pointPlayer1 = 0;
+let pointPlayer2 = 0;
 
-function addFigure(posX, posY, src, player) {
+let initPlayers = () => {
+    if (document.querySelector('#player1-input').value == "") {
+        player1 = "Jugador 1";
+    } else {
+        player1 = document.querySelector('#player1-input').value;
+    }
+
+    if (document.querySelector('#player2-input').value == "") {
+        player2 = "Jugador 2";
+    } else {
+        player2 = document.querySelector('#player2-input').value;
+    }
+}
+
+let addFigure = (posX, posY, src, player) => {
     addFicha(posX, posY, src, player);
     drawFigures();
 }
@@ -27,6 +50,10 @@ let drawFigures = () => {
         lastClickedFigure.draw();
     }
     tablero.iniciarTablero();
+    puntajeYTurno();
+    if (gano != -1) {
+        setGanador(gano);
+    }
 }
 
 let addFicha = (posX, posY, src, player) => {
@@ -55,7 +82,7 @@ function onMouseDown(event) {
         lastClickedFigure = null;
     }
     let clickedFigure = findClickedFigure(event.layerX, event.layerY);
-    if (clickedFigure != null && turno == clickedFigure.getJugador()) {
+    if (clickedFigure != null && turno == clickedFigure.getJugador() && gano == -1) {
         lastClickedFigure = clickedFigure;
     }
     drawFigures();
@@ -67,9 +94,7 @@ function onMouseMoved(event) {
         drawFigures();
     }
 }
-let lastFigurePlayed = null;
-let lastFigurePlayedX = null;
-let lastFigurePlayedY = null;
+
 function onMouseUp(event) {
     isMouseDown = false;
     if (lastClickedFigure != null) {
@@ -84,12 +109,18 @@ function onMouseUp(event) {
                             tablero.setFicha(i, j, lastClickedFigure.getJugador());
                             lastClickedFigure.setPosition(x + (generalSize * i), y - (generalSize * j));
                             lastClickedFigure.setJugo(true);
-                            lastFigurePlayed = lastClickedFigure;
                             lastFigurePlayedX = i;
                             lastFigurePlayedY = j;
-                            drawFigures();
                             cambiaTurno();
-                            console.log('Gano el: ' + tablero.isGanador(i, j, lastClickedFigure.getJugador()));
+                            drawFigures();
+                            if (tablero.isGanador(i, j, lastClickedFigure.getJugador())) {
+                                setGanador(lastClickedFigure.getJugador());
+                                if (lastClickedFigure.getJugador() == 1) {
+                                    pointPlayer1++;
+                                } else {
+                                    pointPlayer2++;
+                                }
+                            }
                             break;
                         }
                     }
@@ -101,14 +132,42 @@ function onMouseUp(event) {
     }
 }
 
-let volverUltimaFicha = () => {
-    if (lastClickedFigure != null) {
-        lastClickedFigure.setJugo(false);
-        lastClickedFigure.volverAOrigen();
+let setGanador = (player) => {
+    gano = player;
+    context.strokeStyle = "#FF0";
+    context.font = "150px Comic Sans MS";
+    if (player == 1) {
+        context.fillStyle = "red";
+        context.fillText("Ganó " + player1, 300, 300);
+        context.strokeText("Ganó " + player1, 300, 300);
+        context.stroke();
     }
-    lastClickedFigure = null;
-    drawFigures();
+    else {
+        context.fillStyle = "blue";
+        context.fillText("Ganó " + player2, 300, 300);
+        context.strokeText("Ganó " + player2, 300, 300);
+        context.stroke();
+    }
 }
+
+let puntajeYTurno = () => {
+    if (juegoIniciado == true) {
+        context.strokeStyle = "#FF0";
+        context.font = "20px Comic Sans MS";
+        if (turno == 1) {
+            context.fillStyle = "#F00";
+            context.fillText(player1 + ": " + pointPlayer1 + " pts.", 20, 25);
+            context.fillStyle = "#000";
+            context.fillText(player2 + ": " + pointPlayer2 + " pts.", 20, 50);
+        } else {
+            context.fillStyle = "#000";
+            context.fillText(player1 + ": " + pointPlayer1 + " pts.", 20, 25);
+            context.fillStyle = "#00F";
+            context.fillText(player2 + ": " + pointPlayer2 + " pts.", 20, 50);
+        }
+    }
+}
+
 
 let clearCanvas = () => {
     context.fillStyle = '#FFFFFF';
@@ -132,9 +191,18 @@ let cambiaTurno = () => {
     }
 }
 
-let reiniciarJuego = () => {
+let volverUltimaFicha = () => {
     if (lastClickedFigure != null) {
-        lastClickedFigure = null;
+        lastClickedFigure.setJugo(false);
+        lastClickedFigure.volverAOrigen();
+    }
+    lastClickedFigure = null;
+    drawFigures();
+}
+
+let reiniciarJuego = () => {
+    if (juegoIniciado == true) {
+        gano = -1;
         turno = 1;
         figures = [];
         tablero.iniciarMatriz();
@@ -146,20 +214,28 @@ let reiniciarJuego = () => {
 
 let deshacerUltimaJugada = () => {
     if (lastFigurePlayedX != null) {
-        volverUltimaFicha();
+        gano = -1;
         tablero.setFicha(lastFigurePlayedX, lastFigurePlayedY, 0);
         cambiaTurno();
-        drawFigures();
+        volverUltimaFicha();
     }
 }
 
-let juegoIniciado = false;
 let iniciarJuego = () => {
     if (juegoIniciado == false) {
+        initPlayers();
         juegoIniciado = true;
+        gano = -1;
+        tablero.updateWin();
         tablero.iniciarFondo();
         tablero.iniciarTablero();
         tablero.iniciarMatriz();
+        document.querySelector("#initGame").disabled = true;
+        document.querySelector('#player1-input').disabled = true;
+        document.querySelector('#player2-input').disabled = true;
+        document.querySelector('#tokenToWin').disabled = true;
+        document.querySelector("#restartGame").disabled = false;
+        document.querySelector("#undoPlayed").disabled = false;
         canvas.addEventListener('mousedown', onMouseDown, false);
         canvas.addEventListener('mouseup', onMouseUp, false);
         canvas.addEventListener('mousemove', onMouseMoved, false);
@@ -174,6 +250,8 @@ let loadPage = () => {
     document.querySelector("#initGame").addEventListener("click", iniciarJuego);
     document.querySelector("#restartGame").addEventListener("click", reiniciarJuego);
     document.querySelector("#undoPlayed").addEventListener("click", deshacerUltimaJugada);
+    document.querySelector("#restartGame").disabled = true;
+    document.querySelector("#undoPlayed").disabled = true;
 
 
 }

@@ -1,10 +1,15 @@
 class Tablero {
-    constructor(context, filas, columnas, size) {
+    constructor(context, filas, columnas, size, win) {
         this.context = context;
         this.filas = filas;
         this.columnas = columnas;
         this.size = size;
         this.matriz = [];
+        this.win = win;
+    }
+
+    updateWin(){
+        this.win = document.querySelector('#tokenToWin').value;
     }
 
     iniciarTablero() {
@@ -57,7 +62,7 @@ class Tablero {
             c--;
         }
 
-        if (total >= 4) {
+        if (total >= this.win) {
             return jugador;
         }
 
@@ -69,7 +74,7 @@ class Tablero {
             total++;
             f--;
         }
-        if (total >= 4) {
+        if (total >= this.win) {
             return jugador;
         }
 
@@ -91,7 +96,7 @@ class Tablero {
             c++;
             f++;
         }
-        if (total >= 4) {
+        if (total >= this.win) {
             return jugador;
         }
 
@@ -114,7 +119,7 @@ class Tablero {
             f--;
         }
 
-        if (total >= 4) {
+        if (total >= this.win) {
             return jugador;
         }
         return false;

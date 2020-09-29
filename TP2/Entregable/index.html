@@ -24,12 +24,39 @@
             </div>
         </div>
         <div class="row">
-            <button class="btn btn-danger btn-large" id="undoPlayed">DESHACER JUGADA</button>
-            <button class="btn btn-success btn-large" id="initGame">INICIAR JUEGO</button>
-            <button class="btn btn-warning btn-large" id="restartGame">REINICIAR JUEGO</button>
-
-        
+            <div class="col-3">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Jugador 1</span>
+                    </div>
+                    <input type="text" maxlength="5" id="player1-input" class="form-control" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Jugador 2</span>
+                    </div>
+                    <input type="text" maxlength="5" id="player2-input" class="form-control" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+            <div class="offset-1 col-2">
+                <div class="form-group">
+                    <label for="tokenToWin">Cantidad de fichas para ganar:</label>
+                    <select class="form-control" id="tokenToWin">
+                        <option>3</option>
+                        <option selected="selected">4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="offset-1 col-5">
+                <button class="btn btn-danger btn-large" id="undoPlayed">DESHACER JUGADA</button>
+                <button class="btn btn-warning btn-large" id="restartGame">REINICIAR JUEGO</button>
+                <button class="btn btn-success btn-large" id="initGame">INICIAR JUEGO</button>
+            </div>
         </div>
+    </div>
 
     </div>
     <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
