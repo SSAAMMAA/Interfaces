@@ -100,9 +100,9 @@ function onMouseUp(event) {
     if (lastClickedFigure != null) {
         let x = 300;
         let y = 550;
-        if (event.layerX > 250 && event.layerX < (250 * tablero.getFila()) && event.layerY >= 0 && event.layerY < generalSize) {
+        if (event.layerX > tablero.getInicio() && event.layerX < (tablero.getInicio() * tablero.getFila()) && event.layerY >= 0 && event.layerY < generalSize) {
             for (let i = 0; i <= tablero.getFila(); i++) {
-                let inicio = 250 + (generalSize * i);
+                let inicio = tablero.getInicio() + (generalSize * i);
                 for (let j = 0; j <= tablero.getColumna(); j++) {
                     if (event.layerX >= inicio && event.layerX <= inicio + 99) {
                         if (tablero.getFicha(i, j) == 0) {

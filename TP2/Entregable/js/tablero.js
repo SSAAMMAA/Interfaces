@@ -12,10 +12,14 @@ class Tablero {
         this.win = document.querySelector('#tokenToWin').value;
     }
 
+    getInicio(){
+        return ((document.querySelector('#canvas').width - (this.columnas * this.size))/2);
+    }
+
     iniciarTablero() {
         for (let x = 0; x < this.columnas; x++) {
             for (let y = 0; y < this.filas; y++) {
-                let posX = (x * this.size) + 250;
+                let posX = (x * this.size) + this.getInicio();
                 let posY = (y * this.size) + 100;
                 let cuadrado = new Rectangulo();
                 cuadrado.addImage("images/casillero.png", posX, posY, this.size);
@@ -26,7 +30,7 @@ class Tablero {
     iniciarFondo() {
         for (let x = 0; x < this.columnas; x++) {
             for (let y = 0; y < this.filas; y++) {
-                let posX = (x * this.size) + 250;
+                let posX = (x * this.size) + this.getInicio();
                 let posY = (y * this.size) + 100;
                 let cuadrado = new Rectangulo();
                 cuadrado.addImage("images/casillero-fondo.png", posX, posY, this.size);

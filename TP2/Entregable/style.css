@@ -1,7 +1,3 @@
-body {
-    background-color: #ddd4ee;
-}
-
 .hidden {
     display: none;
 }
@@ -19,8 +15,8 @@ body {
 #canvas {
     /*width: 100%;
     height: 38em;*/
-    border: solid 1px #ddd4ee;
-    background-color: #ffffff;
+    border: solid 1px #FFF;
+    background-color: #FFF;
 }
 
 .btn {
