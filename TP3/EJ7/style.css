@@ -1,0 +1,23 @@
+details[open] summary~* {
+    animation: sweep .5s linear;
+}
+
+@keyframes sweep {
+    0% {
+        opacity: 0;
+        margin-left: -10px
+    }
+    100% {
+        opacity: 1;
+        margin-left: 0px
+    }
+}
+
+details:hover {
+    background: rgba(0, 255, 0, 0.15);
+    transition: all 1s ease;
+}
+
+table, th, td {
+    border: 1px solid black;
+  }

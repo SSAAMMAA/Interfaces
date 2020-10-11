@@ -1,0 +1,13 @@
+.player{
+    height: 256px;
+    width: 256px;
+    background-image: url(./spritestrip.png);
+    margin: 0 auto;
+    animation: caminar 0.5s steps(6) infinite;
+}
+
+@keyframes caminar{
+    0%{background-position: 0px;}
+    100%{background-position: 1536px;}
+
+}

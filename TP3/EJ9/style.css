@@ -1,0 +1,51 @@
+.progress-btn {
+	position: relative;
+	width: 150px;
+	height: 50px;
+	display: inline-block;
+	background: #f44336;
+	font-family: "RobotoDraft","Roboto",sans-serif;
+	color: #fff;
+	font-weight: normal;
+	font-size: 20px;
+	transition: all 0.4s ease;
+}
+
+.progress-btn .progress {
+	width: 0%;
+	background: #D32F2F;
+	opacity: 0;
+	transition: all 0.3s ease;
+}
+
+.progress-btn.active .progress {
+	opacity: 1;
+	animation: progress-anim 10s ease 0s;
+}
+
+@keyframes progress-anim {
+	0% {
+		width: 0%;
+	}
+	5% {
+		width: 0%;
+	}
+	10% {
+		width: 15%;
+	}
+	30% {
+		width: 40%;
+	}
+	50% {
+		width: 55%;
+	}
+	80% {
+		width: 100%;
+	}
+	95% {
+		width: 100%;
+	}
+	100% {
+		width: 0%;
+	}
+}
