@@ -3,18 +3,40 @@
         background-position-x: 0px;
     }
     100% {
-        background-position-x: -1823px;
+        background-position-x: -1880px;
     }
+}
+
+@font-face {
+    font-family: 'toy-story-font';
+    src: URL('../fonts/MODENINE.TTF') format('truetype');
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     background-color: #3ea2cf;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 0;
     min-height: 100vh;
     perspective: 400px;
+}
+
+.paralax-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.logo-container {
+    height: 50%;
+    width: 50%;
+    position: relative;
+    margin: 0 auto;
+    z-index: 3;
 }
 
 #toy_story_logo {
@@ -24,59 +46,124 @@ body {
     object-fit: cover;
 }
 
-.paralax-hero {
-    width: 100%;
-    height: 100%;
-}
-
-.logo-container {
-    height: 50%;
-    width: 50%;
-    position: relative;
-    top: -1210px;
-    margin: 0 auto;
-    z-index: 3;
-}
-
 .big-cloud, .small-cloud {
     height: 690px;
     width: 100%;
     left: 0;
-    position: relative;
+    position: absolute;
     background-repeat: repeat;
     background-size: 15%;
 }
 
 .small-cloud {
     background-image: url("../images/clouds_small.png");
-    top: -675px;
-    animation: movimiento 40s infinite linear;
+    animation: movimiento 75s infinite linear;
     z-index: 1;
 }
 
 .big-cloud {
     background-image: url("../images/clouds_big.png");
-    animation: movimiento 30s infinite linear;
+    animation: movimiento 45s infinite linear;
     z-index: 2;
 }
 
-body > *:not(#loading) {
-    filter: blur(3px);
+.banner-container {
+    width: 100%;
+    position: absolute;
+    top: 80%;
+    z-index: 5;
+    text-align: center;
 }
 
-#loading{
+.banner-container>img {
+    width: 100%;
+}
+
+#countdown {
+    position: absolute;
+    top: 8%;
+    left: 30%;
+    font-family: toy-story-font;
+    color: #e10024;
+    font-weight: bolder;
+}
+
+/* menu hamburguesa */
+
+.burger-menu {
+    width: 15%;
+    overflow: hidden;
+    background-color: rgba(97, 95, 95, 0);
+    position: sticky;
+    top: 25px;
+    margin-left: 25px;
+    z-index: 999;
+}
+
+.burger-menu #myLinks {
+    display: none;
+}
+
+.burger-menu a {
+    width: 40%;
+    padding: 8px 8px;
+    color: #fed700;
+    background-color: #05428a;
+    font-family: toy-story-font;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+}
+
+.burger-menu a:hover {
+    color: #f4aa28;
+    background-color: #162f51;
+}
+
+#menu-input {
+    width: 2vh;
+    border-radius: 5px 5px;
+    padding: 14px 16px;
+}
+
+.burger-menu a.icon {
+    background: #e10024;
+    color: #fed700;
+    top: 0;
+}
+
+#menu-input:hover {
+    background-color: #ac001d;
+    color: #f4aa28;
+}
+
+.active {
+    background-color: #631414;
+    color: white;
+}
+
+/* body > *:not(#loading) {
+    filter: blur(3px);
+} */
+
+#loading {
     display: flex;
-    position: fixed;
+    position: sticky;
+    top: 50%;
     justify-content: center;
     align-items: center;
     z-index: 9999;
 }
 
-#loading > img {
+#loading>img {
     height: 70px;
     width: 70px;
     animation: loading 2s infinite ease-in-out;
     transform-origin: 50%;
+}
+
+.hidden {
+    display: none!important;
 }
 
 @keyframes loading {

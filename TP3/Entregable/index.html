@@ -7,17 +7,35 @@
     <title>Toy Story</title>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="shortcut icon" href="./images/icon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <div id="loading"><img src="./images/loading.png" alt=""></div>
+    <div class="burger-menu">
+        <a href="javascript:void(0);" class="icon" id="menu-input">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div id="myLinks">
+            <a>HOME</a>
+            <a>EVENTS</a>
+            <a>CHARACTER</a>
+            <a>ABOUT</a>
+            <a>CONTACT</a>
+        </div>
+    </div>
+    <div id="loading" class="hidden"><img src="./images/loading.png" alt=""></div>
     <div class="paralax-hero">
         <div class="big-cloud"></div>
         <div class="small-cloud"></div>
-        
+
         <div class="logo-container">
             <img id="toy_story_logo" src="./images/logo.png" alt="">
         </div>
+    </div>
+    <div class="banner-container">
+        <div id="countdown"></div>
+
+        <img src="./images/banner-transition.png" alt="">
     </div>
 </body>
 <script src="./js/script.js"></script>
