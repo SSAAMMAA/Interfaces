@@ -19,7 +19,6 @@ function disableScroll() {
   window.scrollTo(0, 0);
 }
 
-
 let loading = () => {
   document.querySelector(".burger-menu").style.filter = `blur(4px)`;
   document.querySelector(".paralax-hero").style.filter = `blur(4px)`;
