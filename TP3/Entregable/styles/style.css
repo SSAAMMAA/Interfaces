@@ -345,10 +345,13 @@ body {
     transform: perspective(600px);
     transform-origin: 100% 50%;
     transform-style: preserve-3d;
+    perspective: 400px;
+
 }
 
 .rotar img:hover {
-  transform: perspective(2000px) rotateX(0deg) rotateY(35deg) rotateZ(0deg) translateX(0px) translateY(-15px) translateZ(0px);}
+  transform: perspective(2000px) rotateY(35deg) ;
+}
 
 .rotar p {
     align-self: center;
