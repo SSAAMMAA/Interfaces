@@ -18,7 +18,7 @@
         <div class="transform" id="myLinks">
             <a href="index.html">INICIO</a>
             <a href="events.html">EVENTOS</a>
-            <a href="forum.html">FORO</a>
+            <a id="forum-link" href="events.html#forum">FORO</a>
             <a href="https://disneylatino.com/">PELICULAS</a>
             <a href="https://preview.disneyplus.com">DISNEY+</a>
             <a href="https://www.pixar.com/">PIXAR</a>
@@ -88,9 +88,37 @@
     <div class="transition-container">
         <img src="./images/transition-events.png" alt="">
     </div>
-    <div class="forum">
+    <section id="forum">
+        <img class ="coment-title" src="./images/coments.png" alt="" srcset="">
+        <div class="comentarios">
+            <p class="cajaPar"><span class="username">Pabloka:</span> Muy bueno el evento pasado!!</p>
+            <p class="cajaImpar"><span class="username">Triki-Triki:</span> La cuatro me parecio innecesaria</p>
+            <p class="cajaPar"><span class="username">JedY-BoY:</span> No entendi la 3, el resto re buenas</p>
+            <p class="cajaImpar"><span class="username">Gulian:</span> Mira, la uno y la dos son las mejores, que se yo!
+            </p>
+            <p class="cajaPar"><span class="username">SSAAMMAA:</span> Cuanta nostalgia viejo, los productos son lo
+                mas!!!</p>
+            <p class="cajaImpar"><span class="username">Rubicon:</span> Encontre muchos errores en la escena que se
+                suben al avion en la 2 :( </p>
+        </div>
+        <div class="form-coment">
+            <form>
 
-    </div>
+                <label for="fname">Nombre</label>
+                <input type="text" id="fname" name="firstname" placeholder="Ingrese aqui su nombre">
+
+                <label for="lname">Apellido</label>
+                <input type="text" id="lname" name="lastname" placeholder="Ingrese aqui su apellido">
+
+                <label for="subject">Comentario</label>
+                <textarea id="subject" name="subject" placeholder="Deje un comentario..."
+                    style="height:200px"></textarea>
+
+                <button id="button-send"><span class="button-text">Enviar comentario</span> <img class="button-img" src="./images/loading.png" alt=""></button>
+
+            </form>
+        </div>
+    </section>
 </body>
 <script src="./js/script_events.js"></script>
 
