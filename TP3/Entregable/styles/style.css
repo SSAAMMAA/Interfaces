@@ -426,7 +426,7 @@ body {
     width: 30%;
     align-self: center;
     margin: 3%;
-    opacity: 0;
+    opacity: 0.5;
 }
 
 input[type=text], select, textarea {
