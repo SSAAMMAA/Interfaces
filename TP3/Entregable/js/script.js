@@ -26,7 +26,7 @@ let loading = () => {
   document.querySelector(".floor").style.filter = `blur(4px)`;
   document.querySelector(".loading").classList.remove("hidden");
   window.addEventListener('scroll', disableScroll);
-  setTimeout(function () { stopLoading(); }, 6000);
+  setTimeout(function () { stopLoading(); }, 3000);
 }
 
 let stopLoading = () => {
@@ -39,7 +39,7 @@ let stopLoading = () => {
 }
 
 //COUNTDOWN
-let countDownDate = new Date("Dec 10, 2020 18:00:00").getTime();
+let countDownDate = new Date("Dec 1, 2020 18:00:00").getTime();
 
 let x = setInterval(function () {
 
@@ -51,9 +51,24 @@ let x = setInterval(function () {
   let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  if (days != 0) {
+    days += " dias, ";
+  } else {
+    days = "";
+  }
+  if (hours != 0) {
+    hours += " horas, ";
+  } else {
+    hours = "";
+  }
+  if (minutes != 0) {
+    minutes += " minutos, ";
+  } else {
+    minutes = "";
+  }
+  seconds += " segundos.";
 
-  document.querySelector("#countdown").innerHTML = "El estreno sera en " + days + " dias, " + hours + " horas, "
-    + minutes + " minutos, " + seconds + " segundos";
+  document.querySelector("#countdown").innerHTML = "El estreno sera en " + days + hours + minutes + seconds;
 
   if (distance < 0) {
     clearInterval(x);

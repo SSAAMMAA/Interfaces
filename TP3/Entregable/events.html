@@ -89,7 +89,7 @@
         <img src="./images/transition-events.png" alt="">
     </div>
     <section id="forum">
-        <img class ="coment-title" src="./images/coments.png" alt="" srcset="">
+        <img class="coment-title" src="./images/coments.png" alt="" srcset="">
         <div class="comentarios">
             <p class="cajaPar"><span class="username">Pabloka:</span> Muy bueno el evento pasado!!</p>
             <p class="cajaImpar"><span class="username">Triki-Triki:</span> La cuatro me parecio innecesaria</p>
@@ -100,6 +100,10 @@
                 mas!!!</p>
             <p class="cajaImpar"><span class="username">Rubicon:</span> Encontre muchos errores en la escena que se
                 suben al avion en la 2 :( </p>
+            <p class="new-box cajaPar hidden">
+                <span id="user-coment" class="username"></span>
+                <span id="new-coment"></span>
+            </p>
         </div>
         <div class="form-coment">
             <form>
@@ -113,9 +117,7 @@
                 <label for="subject">Comentario</label>
                 <textarea id="subject" name="subject" placeholder="Deje un comentario..."
                     style="height:200px"></textarea>
-
-                <button id="button-send"><span class="button-text">Enviar comentario</span> <img class="button-img" src="./images/loading.png" alt=""></button>
-
+                <div class="container-btn"><a href="#" class='btn'>Enviar comentario</a></div>
             </form>
         </div>
     </section>

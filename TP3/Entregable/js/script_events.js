@@ -8,7 +8,7 @@ let loading = () => {
 	document.querySelector(".transition-container").style.filter = `blur(4px)`;
 	document.querySelector("#forum").style.filter = `blur(4px)`;
 	document.querySelector(".loading").classList.remove("hidden");
-	setTimeout(function () { stopLoading(); }, 6000);
+	setTimeout(function () { stopLoading(); }, 3000);
 }
 
 let stopLoading = () => {
@@ -45,23 +45,55 @@ window.onscroll = function () {
 	changeOpacity(".form-coment", (pos - 300) * 0.001);
 }
 
-//animar boton de send
-document.querySelector("#button-send").addEventListener("click", function (e) {
-	e.preventDefault();
-	document.querySelector(".button-text").style.transition = "opacity .5s linear 0s";
-	document.querySelector(".button-img").style.transition = "opacity .5s linear 0s";
-	document.querySelector(".button-text").style.display = "none";
-	document.querySelector(".button-text").innerHTML = "Enviado exitosamente";
-	document.querySelector(".button-img").style.display = "block";
-	setTimeout(function () { 
-		document.querySelector("#button-send").style.background = "#329b3f";
-		document.querySelector(".button-text").style.display = "block";
-		document.querySelector(".button-img").style.display = "none";
-		setTimeout(function () { 
-			document.querySelector("#button-send").style.background = "#854aaf";
-			document.querySelector(".button-text").innerHTML = "Enviar comentario";
-		}, 3000);
-	}, 3000);
+//animar boton de send y validacones de que los campos no esten vacios
+let btn = document.querySelector(".btn");
 
+btn.addEventListener("click", function (e) {
+	e.preventDefault();
+	let nombre = document.querySelector("#fname");
+	let apellido = document.querySelector("#lname");
+	let mensaje = document.querySelector("#subject");
+	if (nombre.value == "") {
+		nombre.style.background = "#d17f7f";
+		nombre.addEventListener("click", function () {
+			nombre.style.background = "#FFF";
+		});
+		setTimeout(function () {
+			nombre.style.background = "#FFF";
+		}, 4000);
+	}
+	if (apellido.value == "") {
+		apellido.style.background = "#d17f7f";
+		apellido.addEventListener("click", function () {
+			apellido.style.background = "#FFF";
+		});
+		setTimeout(function () {
+			apellido.style.background = "#FFF";
+		}, 4000);
+	}
+	if (mensaje.value == "") {
+		mensaje.style.background = "#d17f7f";
+		mensaje.addEventListener("click", function () {
+			mensaje.style.background = "#FFF";
+		});
+		setTimeout(function () {
+			mensaje.style.background = "#FFF";
+		}, 4000);
+	}
+	if ((nombre.value != "") && (apellido.value != "") && (mensaje.value != "")) {
+		btn.classList.add('btn-progress');
+		setTimeout(function () {
+			btn.classList.add('btn-fill')
+		}, 500);
+		setTimeout(function () {
+			btn.classList.remove('btn-fill')
+		}, 4100);
+		setTimeout(function () {
+			btn.classList.add('btn-complete');
+			document.querySelector("#user-coment").innerHTML = nombre.value + " " + apellido.value + ": ";
+			document.querySelector("#new-coment").innerHTML = mensaje.value;
+			document.querySelector(".new-box").classList.remove("hidden");
+		}, 4100);
+	}
 });
-//document.addEventListener("DOMContentLoaded", loading);
+document.addEventListener("DOMContentLoaded", loading);
