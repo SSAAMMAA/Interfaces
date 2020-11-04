@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'Poppins';
+    src: URL('../fonts/Poppins-Bold.ttf') format('truetype');
+}
+
+body{
+    background: linear-gradient(0deg, #F072A7 0%, #66fe90 100%); 
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+
+}
+.titulo, .subtitulo{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 144px;
+    text-align: center;
+    color: #FFF;
+}
+.titulo{
+    font-size: 96px;
+    margin-top: 9%;
+}
+.subtitulo{
+    font-size: 80px;
+    margin-top: -5%;
+}
+
+.btn{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 326px;
+    height: 79px;
+    background: #292929;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 100px;
+}
+.btn-content{
+    position: absolute;
+    font-size: 20px;
+    left: 50%;
+    top: 12%;
+    transform: translateX(-50%);
+    font-family: Poppins;
+    font-style: normal; 
+    text-align: center;
+    color: #FFF;
+}
+.btn-papel{
+    top: 58%;  
+}
+
+.btn-editor{
+    top: 73%;
+}
+
+.btn-presentacion{
+    top: 88%;  
+}
